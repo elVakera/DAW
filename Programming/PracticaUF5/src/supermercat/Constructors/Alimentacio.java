@@ -1,4 +1,4 @@
-import java.util.Date;
+package supermercat.Constructors;
 
 public class Alimentacio extends Producte{
     String dataCaducitat;

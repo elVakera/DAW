@@ -1,3 +1,5 @@
+package supermercat.Constructors;
+
 public abstract class Producte {
     float preu;
     String nom, codiBarres;

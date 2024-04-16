@@ -21,6 +21,7 @@ public class Controlador {
                 case "1":
                     boolean fiProducte;
                     String opProducte;
+
                     do{
                         Vista.mostrarMenuProducte();
                         opProducte = SCN.nextLine();
@@ -58,7 +59,7 @@ public class Controlador {
                                 Vista.mostrarMisatge("Error al introduir opcio");
                                 fiProducte = true;
                         }
-                    }while (!fiProducte);
+                    }while (fiProducte);
 
                     fiSupermercat = true;
                     break;
@@ -74,7 +75,7 @@ public class Controlador {
                     Vista.mostrarMisatge("Error al introduir opcio");
                     fiSupermercat = true;
             }
-        }while (!fiSupermercat);
+        }while (fiSupermercat);
 
     }
 }

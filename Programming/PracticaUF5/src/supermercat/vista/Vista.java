@@ -21,9 +21,9 @@ public class Vista {
         System.out.println("\t-------------------------");
         System.out.println("\t--------PRODUCTE---------");
         System.out.println("\t-------------------------");
-        System.out.println("\t1) Alimentacio");
-        System.out.println("\t2) Textil");
-        System.out.println("\t3) Electronica");
+        System.out.println("\t1) Alimentació");
+        System.out.println("\t2) Tèxtil");
+        System.out.println("\t3) Electrònica");
         System.out.println("\t0) Tornar");
     }
 
