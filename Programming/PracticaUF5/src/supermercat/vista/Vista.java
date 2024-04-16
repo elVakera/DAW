@@ -1,5 +1,5 @@
 package supermercat.vista;
-
+import supermercat.model.Model;
 public class Vista {
     public static void mostrarMenuSuper(){
         System.out.println("\tBENVINGUT AL SUPERMERCAT");
@@ -11,4 +11,20 @@ public class Vista {
         System.out.println("\t3) Mostrar carret de la compra");
         System.out.println("\t0) Acabar");
     }
+    public static void mostrarMisatge(String msg){
+        System.out.println(msg);
+    }
+    public static void mostrarIntroduccioDades(String msg){
+        System.out.print(msg);
+    }
+    public static void mostrarMenuProducte(){
+        System.out.println("\t-------------------------");
+        System.out.println("\t--------PRODUCTE---------");
+        System.out.println("\t-------------------------");
+        System.out.println("\t1) Alimentacio");
+        System.out.println("\t2) Textil");
+        System.out.println("\t3) Electronica");
+        System.out.println("\t0) Tornar");
+    }
+
 }
