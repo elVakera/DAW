@@ -1,12 +1,15 @@
 package supermercat.Constructors;
 
+import supermercat.model.Model;
+
+import java.text.ParseException;
+
 public class Alimentacio extends Producte{
     String dataCaducitat;
     public Alimentacio(float preu, String nom, String codiBarres, String dataCaducitat){
         super(preu, nom, codiBarres);
         this.dataCaducitat = dataCaducitat;
     }
-
     public String getDataCaducitat() {
         return dataCaducitat;
     }
@@ -15,8 +18,9 @@ public class Alimentacio extends Producte{
         this.dataCaducitat = dataCaducitat;
     }
 
-    private float preuCaducitat(float preu, String dataCaducitat){
-
-     return 0;
+    @Override
+    public float getPreu() throws ParseException {
+        return super.preu = Model.preuAlimentacio(super.preu, getDataCaducitat());
     }
+
 }
