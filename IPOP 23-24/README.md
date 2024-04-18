@@ -7,7 +7,7 @@
 
 ## - Objetivos Profesionales
 Mi objetivo profesional es establecerme en una empresa competente y con futuro formarme constantemente para adaptarme a las nuevas tecnologías.
-## - Itinerrio De Formación
+## - Itinerario De Formación
 
 ***
 # Plan De Promoción Personal
