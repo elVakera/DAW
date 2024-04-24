@@ -1,5 +1,4 @@
 package supermercat.vista;
-
 import supermercat.model.Model;
 public class Vista {
     public static void mostrarMenuSuper(){
@@ -11,6 +10,7 @@ public class Vista {
         System.out.println("\t2) Passar per caixa");
         System.out.println("\t3) Mostrar carret de la compra");
         System.out.println("\t0) Acabar");
+        System.out.println();
     }
     public static void mostrarMisatge(String msg){
         System.out.println(msg);
@@ -26,17 +26,21 @@ public class Vista {
         System.out.println("\t2) Tèxtil");
         System.out.println("\t3) Electrònica");
         System.out.println("\t0) Tornar");
+        System.out.println();
     }
-    public static void mostrarCaixa(){
+    public static void mostrarProductes(String producte){
+        System.out.println("\t->\t" + producte);
+    }
+    public static void mostrarCapcalera(){
+        System.out.printf("\t%12s\t%12s\t%8s\t%s\n", "Nom", "Unitats", "Preu Unitari", "Preu Total");
+    }
+    public static void mostrarCompra(){
         System.out.println("\t-------------------------");
         System.out.println("\t------SUPERMERCAT--------");
         System.out.println("\t-------------------------");
-        System.out.print("\tData: " + Model.mostrarDataActual());
+        System.out.println("\tData: " + Model.mostrarDataActual());
         System.out.println("\t-------------------------");
-        System.out.println(mostrarCompra());
-    }
-    public static String mostrarCompra(){
-
-        return "0";
+        Model.carroActual();
+        System.out.println();
     }
 }
