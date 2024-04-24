@@ -32,27 +32,15 @@ public class Controlador {
                                 fiProducte = false;
                                 break;
                             case "1":
-                                Vista.mostrarMisatge("Afegir aliment");
-                                Vista.mostrarIntroduccioDades("Nom producte: ");
-                                Vista.mostrarIntroduccioDades("Preu: ");
-                                Vista.mostrarIntroduccioDades("Composicio: ");
-                                Vista.mostrarIntroduccioDades("Codi de barres: ");
+                                Model.afegirProducte(opProducte);
                                 fiProducte = true;
                                 break;
                             case "2":
-                                Vista.mostrarMisatge("Afegir textil");
-                                Vista.mostrarIntroduccioDades("Nom producte: ");
-                                Vista.mostrarIntroduccioDades("Preu: ");
-                                Vista.mostrarIntroduccioDades("Data de caducitat (dd/mm/aaaa): ");
-                                Vista.mostrarIntroduccioDades("Codi de barres: ");
+                                Model.afegirProducte(opProducte);
                                 fiProducte = true;
                                 break;
                             case "3":
-                                Vista.mostrarMisatge("Afegir electronica");
-                                Vista.mostrarIntroduccioDades("Nom producte: ");
-                                Vista.mostrarIntroduccioDades("Preu: ");
-                                Vista.mostrarIntroduccioDades("Garantia (dies): ");
-                                Vista.mostrarIntroduccioDades("Codi de barres: ");
+                                Model.afegirProducte(opProducte);
                                 fiProducte = true;
                                 break;
                             default:
@@ -64,11 +52,11 @@ public class Controlador {
                     fiSupermercat = true;
                     break;
                 case "2":
-
+                    Vista.mostrarCaixa();
                     fiSupermercat = true;
                     break;
                 case "3":
-
+                    Vista.mostrarCompra();
                     fiSupermercat = true;
                     break;
                 default:

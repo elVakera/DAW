@@ -8,10 +8,17 @@ public class Electronica extends  Producte{
         super(preu, nom, codiBarres);
         this.diesGarantia = diesGarantia;
     }
+    public int getDiesGarantia(){
+        return diesGarantia;
+    }
 
     @Override
     public float getPreu() {
         super.preu = Model.preuElectronica(super.preu,diesGarantia);
         return super.preu;
+    }
+    @Override
+    public String toString() {
+        return super.getNom() + " " + super.getCodiBarres() + " " + getPreu() + " " + getDiesGarantia();
     }
 }

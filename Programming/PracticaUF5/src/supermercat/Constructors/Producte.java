@@ -33,4 +33,8 @@ public abstract class Producte {
     public void setCodiBarres(String codiBarres) {
         this.codiBarres = codiBarres;
     }
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

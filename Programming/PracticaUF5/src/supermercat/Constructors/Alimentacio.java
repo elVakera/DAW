@@ -23,4 +23,9 @@ public class Alimentacio extends Producte{
         return super.preu = Model.preuAlimentacio(super.preu, getDataCaducitat());
     }
 
+    @Override
+    public String toString() {
+        return super.getNom() + " " + super.getCodiBarres() + " " + getPreu() + " " + getDataCaducitat();
+    }
+
 }
