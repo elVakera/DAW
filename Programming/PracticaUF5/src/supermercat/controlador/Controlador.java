@@ -1,6 +1,8 @@
 package supermercat.controlador;
 import supermercat.vista.Vista;
 import supermercat.model.Model;
+
+import java.text.ParseException;
 import java.util.Scanner;
 
 public class Controlador {
@@ -37,15 +39,15 @@ public class Controlador {
                                 String nomA, codiBarresA, dataCaducitatA;
                                 float preuA;
 
-                                Vista.mostrarMisatge("Afegir aliment");
-                                Vista.mostrarIntroduccioDades("Nom producte: ");
+                                Vista.mostrarMisatge("\tAfegir aliment");
+                                Vista.mostrarIntroduccioDades("\tNom producte: ");
                                 nomA = SCN.nextLine();
-                                Vista.mostrarIntroduccioDades("Preu: ");
+                                Vista.mostrarIntroduccioDades("\tPreu: ");
                                 preuA = SCN.nextFloat();
                                 SCN.nextLine();
-                                Vista.mostrarIntroduccioDades("Data de caducitat (dd/mm/YYYY): ");
+                                Vista.mostrarIntroduccioDades("\tData de caducitat (dd/mm/YYYY): ");
                                 dataCaducitatA = SCN.nextLine();
-                                Vista.mostrarIntroduccioDades("Codi de barres: ");
+                                Vista.mostrarIntroduccioDades("\tCodi de barres: ");
                                 codiBarresA = SCN.nextLine();
                                 Model.afegirAliment(preuA, nomA, codiBarresA, dataCaducitatA);
                                 fiProducte = true;
@@ -55,15 +57,15 @@ public class Controlador {
                                 String nomT, codiBarresT, composicioT;
                                 float preuT;
 
-                                Vista.mostrarMisatge("Afegir textil");
-                                Vista.mostrarIntroduccioDades("Nom producte: ");
+                                Vista.mostrarMisatge("\tAfegir textil");
+                                Vista.mostrarIntroduccioDades("\tNom producte: ");
                                 nomT = SCN.nextLine();
-                                Vista.mostrarIntroduccioDades("Preu: ");
+                                Vista.mostrarIntroduccioDades("\tPreu: ");
                                 preuT = SCN.nextFloat();
                                 SCN.nextLine();
-                                Vista.mostrarIntroduccioDades("Composicio: ");
+                                Vista.mostrarIntroduccioDades("\tComposicio: ");
                                 composicioT = SCN.nextLine();
-                                Vista.mostrarIntroduccioDades("Codi de barres: ");
+                                Vista.mostrarIntroduccioDades("\tCodi de barres: ");
                                 codiBarresT = SCN.nextLine();
                                 Model.afegirTextil(preuT, nomT, codiBarresT, composicioT);
                                 fiProducte = true;
@@ -74,16 +76,16 @@ public class Controlador {
                                 int diesGarantiaE;
                                 float preuE;
 
-                                Vista.mostrarMisatge("Afegir electronica");
-                                Vista.mostrarIntroduccioDades("Nom producte: ");
+                                Vista.mostrarMisatge("\tAfegir electronica");
+                                Vista.mostrarIntroduccioDades("\tNom producte: ");
                                 nomE = SCN.nextLine();
-                                Vista.mostrarIntroduccioDades("Preu: ");
+                                Vista.mostrarIntroduccioDades("\tPreu: ");
                                 preuE = SCN.nextFloat();
                                 SCN.nextLine();
-                                Vista.mostrarIntroduccioDades("Garantia (nº dies): ");
+                                Vista.mostrarIntroduccioDades("\tGarantia (nº dies): ");
                                 diesGarantiaE = SCN.nextInt();
                                 SCN.nextLine();
-                                Vista.mostrarIntroduccioDades("Codi de barres: ");
+                                Vista.mostrarIntroduccioDades("\tCodi de barres: ");
                                 codiBarresE = SCN.nextLine();
                                 Model.afegirElectronica(preuE, nomE, codiBarresE, diesGarantiaE);
                                 fiProducte = true;
@@ -100,7 +102,12 @@ public class Controlador {
                     break;
 
                 case "2":
+                try {
                     Model.pasarPerCaixa();
+                } catch (ParseException e) {
+                    Vista.mostrarMisatge("Error al parsejar preu");
+                }
+                    
                     fiSupermercat = true;
                     break;
 
