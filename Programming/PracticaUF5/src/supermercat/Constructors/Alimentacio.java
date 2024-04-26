@@ -1,7 +1,5 @@
 package supermercat.Constructors;
 import supermercat.model.Model;
-import supermercat.vista.Vista;
-
 import java.text.ParseException;
 
 public class Alimentacio extends Producte{
