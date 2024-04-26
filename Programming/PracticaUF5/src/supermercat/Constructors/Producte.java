@@ -12,9 +12,11 @@ public abstract class Producte{
 
     }
     public abstract float getPreu() throws ParseException;
+
     public String getNom() {
         return nom;
     }
+
     public String getCodiBarres() {
         return codiBarres;
     }

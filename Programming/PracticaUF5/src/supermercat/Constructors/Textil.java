@@ -34,8 +34,10 @@ public class Textil extends Producte{
     public String toString() {
         if(getPreu() <= 0){
             return String.format("\t%-15s\t%-12s\t%-8s\n", getNom(), getCodiBarres(), 0);
+
         }else {
             return String.format("\t%-15s\t%-12s\t%-8.2f\n", getNom(), getCodiBarres(), getPreu());
+
         }
     }
 

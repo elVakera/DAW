@@ -7,12 +7,15 @@ public class Electronica extends  Producte{
         super(preu, nom, codiBarres);
         setDiesGarantia(diesGarantia);
     }
+
     public void setDiesGarantia(int diesGarantia) {
         this.diesGarantia = diesGarantia;
     }
+
     public int getDiesGarantia(){
         return diesGarantia;
     }
+
     @Override
     public float getPreu() {
         return this.preu = Model.preuElectronica(super.preu, getDiesGarantia());
