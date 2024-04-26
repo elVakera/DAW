@@ -30,6 +30,7 @@ public class Model {
             Vista.mostrarMisatge("Carro complet");
         }
     }
+
     public static void afegirTextil(float preu, String nom, String codiBarres, String composicio){
         if(!comprovarSiHaAcabat()){
             CARRO.add(new Textil(preu, nom, codiBarres, composicio));

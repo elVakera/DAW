@@ -91,6 +91,7 @@ public class Controlador {
                                 fiProducte = true;
                                 break;
 
+
                             default:
                                 Vista.mostrarMisatge("Error al introduir opcio: " + opProducte + " no es una opcio");
                                 fiProducte = true;

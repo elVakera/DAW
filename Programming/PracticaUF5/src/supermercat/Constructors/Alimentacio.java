@@ -20,6 +20,7 @@ public class Alimentacio extends Producte{
     public float getPreu() throws ParseException {
         return this.preu = Model.preuAlimentacio(super.preu, getDataCaducitat());
     }
+
     @Override
     public String toString() {
         try {
