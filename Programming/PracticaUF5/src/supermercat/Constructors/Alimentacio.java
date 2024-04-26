@@ -1,33 +1,42 @@
 package supermercat.Constructors;
 import supermercat.model.Model;
-import supermercat.vista.Vista;
-
-import java.text.ParseException;
+import java.util.Date;
 
 public class Alimentacio extends Producte{
-    String dataCaducitat;
-    public Alimentacio(float preu, String nom, String codiBarres, String dataCaducitat){
+    Date dataCaducitat;
+
+    public Alimentacio(float preu, String nom, String codiBarres, Date dataCaducitat){
         super(preu, nom, codiBarres);
         setDataCaducitat(dataCaducitat);
     }
-    public void setDataCaducitat(String dataCaducitat) {
+
+    public void setDataCaducitat(Date dataCaducitat) {
         this.dataCaducitat = dataCaducitat;
     }
-    public String getDataCaducitat() {
+
+    public Date getDataCaducitat() {
         return dataCaducitat;
     }
-    public String getNom(){return nom;}
-    public String getCodiBarres(){return codiBarres;}
+
+    public String getNom() {
+        return super.getNom();
+    }
+
+    public String getCodiBarres() {
+        return super.getCodiBarres();
+    }
+
     @Override
-    public float getPreu() throws ParseException {
+    public float getPreu(){
         return this.preu = Model.preuAlimentacio(super.preu, getDataCaducitat());
     }
+
     @Override
     public String toString() {
-        try {
-            return String.format("\t%7s\t%12s\t%8.2f\n", getNom(), getCodiBarres(), getPreu());
-        } catch (ParseException e) {
-            return ("Data de caducitat (" + getDataCaducitat() + ") en format incorrecte");
+        if(getPreu() <= 0){
+            return String.format("\t%-15s\t%-12s\t%-8s\n", getNom(), getCodiBarres(), 0);
+        }else {
+            return String.format("\t%-15s\t%-12s\t%-8.2f\n", getNom(), getCodiBarres(), getPreu());
         }
     }
 }

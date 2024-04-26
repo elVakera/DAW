@@ -32,7 +32,7 @@ public class Vista {
         System.out.println("\t->\t" + producte);
     }
     public static void mostrarCapcalera(){
-        System.out.printf("\t%12s\t%12s\t%8s\t%s\n", "Nom", "Unitats", "Preu Unitari", "Preu Total");
+        System.out.printf("\t%-15s\t%-12s\t%-8s\t%s\n", "Nom", "Unitats", "Preu Unitari", "Preu Total");
     }
     public static void mostrarCompra(){
         System.out.println("\t-------------------------");

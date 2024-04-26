@@ -1,7 +1,7 @@
 package supermercat.Constructors;
 import java.text.ParseException;
 
-public abstract class Producte {
+public abstract class Producte{
     float preu;
     String nom, codiBarres;
 
@@ -18,4 +18,5 @@ public abstract class Producte {
     public String getCodiBarres() {
         return codiBarres;
     }
+
 }
