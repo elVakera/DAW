@@ -62,6 +62,7 @@ public class Alimentacio extends Producte{
      */
     @Override
     public String toString() {
+        //si el preu es inferior o igual a 0 sera 0
         if(getPreu() <= 0){
             return String.format("\t%-15s\t%-12s\t%-8s\n", super.getNom(), super.getCodiBarres(), 0);
         }else {

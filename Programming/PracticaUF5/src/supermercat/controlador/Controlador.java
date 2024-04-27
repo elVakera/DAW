@@ -12,21 +12,33 @@ import java.util.Scanner;
  * decisions preses per l'usuari
  */
 public class Controlador {
+    //variables constants
     private static final Scanner SCN = new Scanner(System.in);
 
+    /**
+     * Funcio supermercat, funcio interactiva amb l'usuari que mostra els diferents menus amb els cual l'usuari
+     * interactuara amb l'aplicacio, les diferents excepcions es tractaran a cada try_catch i s'inclouran al document
+     * d'excepcions
+     */
     public static void supermercat(){
         String opSuper;
         boolean fiSupermercat;
-    try {
-        Model.inicialitzaSuper();
 
-    }catch (StackOverflowError error){
-        Vista.mostrarMisatge("Se lio parda");
-    }
+        //inicia creacio d'arxius i demes
+        try {
+            Model.inicialitzaSuper();
 
+        }catch (RuntimeException e){
+            Vista.mostrarMisatge(e.getMessage());
+
+        } catch (StackOverflowError error){
+            Vista.mostrarMisatge("Se lio parda");
+        }
+
+        //mostra en bucle un menu am el que pot escullir si afegir un producte, pasar per caixa, mostrar carro o acabar
         do{
             Vista.mostrarMenuSuper();
-            opSuper = SCN.nextLine();
+            opSuper = SCN.nextLine();       //escull la opcio
 
             switch (opSuper){
                 case "0":
@@ -38,9 +50,11 @@ public class Controlador {
                     boolean fiProducte;
                     String opProducte;
 
+                    /*mostra en bucle el menu per escullir quin producte vol afegir al carro amb les opcions alient,
+                    textil electronica o si vol tornar*/
                     do{
                         Vista.mostrarMenuProducte();
-                        opProducte = SCN.nextLine();
+                        opProducte = SCN.nextLine();        //escull la opcio
 
                         switch (opProducte){
                             case "0":
@@ -69,19 +83,20 @@ public class Controlador {
                                         nomA = nomA.substring(15);
                                     }
 
+                                    //afegir aliment
                                     Model.afegirAliment(preuA, nomA, codiBarresA, Model.comprovarData(dataCaducitatA));
 
                                 }catch (ParseException e){
                                     Vista.mostrarMisatge("Error al introduir la data");
-                                    Model.omplenaRegistreErrors(e);
+                                    Model.omplenaRegistreExcepcions(e);
 
                                 }catch(InputMismatchException e){
                                     Vista.mostrarMisatge("Error al introduir el preu");
-                                    Model.omplenaRegistreErrors(e);
+                                    Model.omplenaRegistreExcepcions(e);
 
                                 }catch (Exception e){
                                     Vista.mostrarMisatge("FATAL ERROR!");
-                                    Model.omplenaRegistreErrors(e);
+                                    Model.omplenaRegistreExcepcions(e);
 
                                 }finally {
                                     fiProducte = true;
@@ -109,11 +124,12 @@ public class Controlador {
                                         nomT = nomT.substring(15);
                                     }
 
+                                    //afegir textil
                                     Model.afegirTextil(preuT, nomT, codiBarresT, composicioT);
 
                                 }catch(InputMismatchException e){
                                     Vista.mostrarMisatge("Error al introduir el preu");
-                                    Model.omplenaRegistreErrors(e);
+                                    Model.omplenaRegistreExcepcions(e);
 
                                 }finally {
                                     fiProducte = true;
@@ -143,11 +159,12 @@ public class Controlador {
                                         nomE = nomE.substring(15);
                                     }
 
+                                    //afegir electronica
                                     Model.afegirElectronica(preuE, nomE, codiBarresE, diesGarantiaE);
 
                                 }catch(InputMismatchException e){
                                     Vista.mostrarMisatge("Error al introduir el preu");
-                                    Model.omplenaRegistreErrors(e);
+                                    Model.omplenaRegistreExcepcions(e);
 
                                 }finally {
                                     fiProducte = true;
@@ -165,11 +182,13 @@ public class Controlador {
                     break;
 
                 case "2":
+                    //genera ticket de compra i neteja el carro
                     Model.pasarPerCaixa();
                     fiSupermercat = true;
                     break;
 
                 case "3":
+                    //mostra el contingut del carro
                     Model.carroActual();
                     fiSupermercat = true;
                     break;
