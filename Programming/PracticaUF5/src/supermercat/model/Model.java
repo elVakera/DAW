@@ -1,5 +1,5 @@
 package supermercat.model;
-import supermercat.Constructors.*;
+import supermercat.constructors.*;
 import supermercat.vista.Vista;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -9,7 +9,6 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 import java.text.SimpleDateFormat;

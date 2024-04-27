@@ -1,4 +1,4 @@
-package supermercat.Constructors;
+package supermercat.constructors;
 
 /**
  * Clase especifica per la creacio d'un producte textil, mante les propietats d'un objecte producte a mes de les

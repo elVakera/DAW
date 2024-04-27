@@ -1,4 +1,4 @@
-package supermercat.Constructors;
+package supermercat.constructors;
 import supermercat.model.Model;
 import java.util.Date;
 

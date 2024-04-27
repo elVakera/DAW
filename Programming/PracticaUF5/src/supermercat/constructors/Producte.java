@@ -1,5 +1,4 @@
-package supermercat.Constructors;
-import java.text.ParseException;
+package supermercat.constructors;
 
 /**
  * Clase general del tipus de productes, aquesta clase abstracte es la base per a crear cualsevol tipus de
