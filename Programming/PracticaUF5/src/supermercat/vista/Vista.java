@@ -54,15 +54,15 @@ public class Vista {
         System.out.println();
     }
 
-    public static void mostrarProductes(String producte){
-        System.out.println(producte + "\t->\t");
-    }
-
     /**
      * Funcio per generar una capçalera de compra en un format determinat
      */
     public static void mostrarCapcaleraTicket(){
-        System.out.printf("\t%-15s\t%-12s\t%-8s\t%s\n", "Nom", "Unitats", "Preu Unitari", "Preu Total");
+        System.out.printf("\t%-15s\t%-12s\t%-8s\t%-8s\n", "Nom", "Unitats", "Preu Unitari", "Preu Total");
+    }
+
+    public static void mostrarCaixa( String nom, String unitats, String preuU, String preuT){
+        System.out.printf("\t%-15s\t%-12s\t%-8s\t%-8s\n", nom, unitats, preuU, preuT);
     }
 
     /**
