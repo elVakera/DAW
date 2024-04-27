@@ -1,6 +1,11 @@
 package supermercat.model;
 import supermercat.Constructors.*;
 import supermercat.vista.Vista;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -81,8 +86,56 @@ public class Model {
             Vista.mostrarMisatge("El carro es buit");
         }
     }
+
     public static void pasarPerCaixa(){
         Vista.mostrarCompra();
         CARRO.clear();
+    }
+    public static void inicialitzaSuper(){
+        final String ARREL = "./PracticaUF5";
+        File carpetaUpdate = new File(ARREL + "/Updates");
+        File carpetaLogs = new File(ARREL + "/Logs");
+        File fitxerUpdate = new File(ARREL + "/Updates/UpdateTextilPrices.dat");
+        File fitxerLogs = new File(ARREL + "/Logs/Exceptions.dat");
+
+        try {
+            creaCarpeta(carpetaLogs);
+            creaCarpeta(carpetaUpdate);
+            creaFitxers(fitxerLogs);
+            creaFitxers(fitxerUpdate);
+
+        }catch (Exception e){
+            Vista.mostrarMisatge(e.getMessage());
+        }
+
+    }
+    public static void omplenaRegistreErrors(Exception eIn){
+        try {
+            final String ARREL_LOGS = "./PracticaUF5/Logs/Exceptions.dat";
+            File rutaLogs = new File(ARREL_LOGS);
+            FileOutputStream obrirAlFinal = new FileOutputStream(rutaLogs, true);
+            PrintStream writerLogs = new PrintStream(obrirAlFinal);
+
+            writerLogs.println("Exception trobada a " + mostrarDataActual() + ": " + eIn.getMessage());
+            writerLogs.close();
+
+        }catch (FileNotFoundException e){
+            Vista.mostrarMisatge("No s'ha trobat l'arxiu/carpeta");
+            omplenaRegistreErrors(e);
+        }
+    }
+    public static void creaCarpeta(File carpeta) throws Exception{
+        if(carpeta.mkdir()){
+            Vista.mostrarMisatge("La carpeta " + carpeta.getName() + " creada correctament");
+        }else {
+            Vista.mostrarMisatge("La carpeta " + carpeta.getName() + " ja existeix");
+        }
+    }
+    public static void creaFitxers(File arxiu)throws Exception{
+        if(arxiu.createNewFile()){
+            Vista.mostrarMisatge("Arxiu " + arxiu.getName() + " creat correctament");
+        }else {
+            Vista.mostrarMisatge("L'arxiu " + arxiu.getName() + " ja existeix");
+        }
     }
 }

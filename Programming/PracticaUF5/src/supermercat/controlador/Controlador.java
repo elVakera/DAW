@@ -2,6 +2,7 @@ package supermercat.controlador;
 import supermercat.vista.Vista;
 import supermercat.model.Model;
 
+import java.io.File;
 import java.text.ParseException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -13,6 +14,7 @@ public class Controlador {
         String opSuper;
         boolean fiSupermercat;
 
+        Model.inicialitzaSuper();
         do{
             Vista.mostrarMenuSuper();
             opSuper = SCN.nextLine();
@@ -62,12 +64,15 @@ public class Controlador {
 
                                 }catch (ParseException e){
                                     Vista.mostrarMisatge("Error al introduir la data");
+                                    Model.omplenaRegistreErrors(e);
 
                                 }catch(InputMismatchException e){
                                     Vista.mostrarMisatge("Error al introduir el preu");
+                                    Model.omplenaRegistreErrors(e);
 
                                 }catch (Exception e){
                                     Vista.mostrarMisatge("FATAL ERROR!");
+                                    Model.omplenaRegistreErrors(e);
 
                                 }finally {
                                     fiProducte = true;
@@ -99,6 +104,7 @@ public class Controlador {
 
                                 }catch(InputMismatchException e){
                                     Vista.mostrarMisatge("Error al introduir el preu");
+                                    Model.omplenaRegistreErrors(e);
 
                                 }finally {
                                     fiProducte = true;
@@ -132,6 +138,7 @@ public class Controlador {
 
                                 }catch(InputMismatchException e){
                                     Vista.mostrarMisatge("Error al introduir el preu");
+                                    Model.omplenaRegistreErrors(e);
 
                                 }finally {
                                     fiProducte = true;
