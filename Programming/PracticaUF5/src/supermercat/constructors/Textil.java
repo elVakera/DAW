@@ -52,6 +52,7 @@ public class Textil extends Producte{
         return preu;
     }
 
+
     /**
      * Funcio per mostrar l'objecte textil com un String sobrescribint la toString generica
      * @return Retorna l'objecte textil amb un format determinat
@@ -67,5 +68,4 @@ public class Textil extends Producte{
 
         }
     }
-
 }

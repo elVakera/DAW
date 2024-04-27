@@ -23,6 +23,10 @@ public class Model {
     private static final LinkedHashMap<String,String[]> HASH_CARRO = new LinkedHashMap<>();
     private static final LinkedHashMap<String,String[]> HASH_CARRO_CAIXA = new LinkedHashMap<>();
 
+    /**
+     * Funcion comprovarCapacitat de carro, comproba si el carro ha arribat a la seva maxima capacitat
+     * @return Retorna cert o fals segons si la capacitat es la maxima
+     */
     private static boolean comprovaCapacitat(){
         return CARRO.size() == CAPACITAT_MAXIMA;
     }
@@ -53,8 +57,8 @@ public class Model {
         if(!comprovaCapacitat()){
             CARRO.add(new Alimentacio(preu, nom, codiBarres, dataCaducitat));
             Vista.mostrarMisatge("Aliment afegit al carro");
-            afegirAlHash(codiBarres, nom);
-            afegirAlHash(codiBarres, nom, preu);
+            //afegirAlHash(codiBarres, nom);
+            //afegirAlHash(codiBarres, nom, preu);
 
         }else {
             Vista.mostrarMisatge("Carro complet");
@@ -74,8 +78,8 @@ public class Model {
         if(!comprovaCapacitat()){
             CARRO.add(new Textil(preu, nom, codiBarres, composicio));
             Vista.mostrarMisatge("Textil afegit al carro");
-            afegirAlHash(codiBarres, nom);
-            afegirAlHash(codiBarres, nom, preu);
+            //afegirAlHash(codiBarres, nom);
+            //afegirAlHash(codiBarres, nom, preu);
 
         }else {
             Vista.mostrarMisatge("Carro complet");
@@ -95,8 +99,8 @@ public class Model {
         if (!comprovaCapacitat()) {
             CARRO.add(new Electronica(preu, nom, codiBarres, diesGarantia));
             Vista.mostrarMisatge("Electronica afegida al carro");
-            afegirAlHash(codiBarres, nom);
-            afegirAlHash(codiBarres, nom, preu);
+            //afegirAlHash(codiBarres, nom);
+            //afegirAlHash(codiBarres, nom, preu);
 
         }else {
             Vista.mostrarMisatge("Carro complet");
@@ -104,44 +108,18 @@ public class Model {
     }
 
     /**
-     * Funcio per afegir al carro els productes per mostrar el carro actual
-     * @param codiBarres Parametre d'entrada que defineix la key del HashMap
-     * @param nom Parametre d'entrada per mostrar com a par dels values del HasMap
+     * Funcio per afegir al carro els productes per mostrar
+     * @param p Parametre d'entrada de tipus Producte que volem afegir a un HashMap
      */
-    public static void afegirAlHash(String codiBarres, String nom){
+    public static void afegirAlHash(Producte p){
         int unitats = 1;
-
-        if(!(HASH_CARRO.containsKey(codiBarres))){
-            String[] valueHash = new String[2];
-            valueHash[0] = nom;
-            valueHash[1] = unitats + "";
-
-            HASH_CARRO.put(codiBarres, valueHash);
-
-        }else {
-            String[] valueHash = new String[2];
-            valueHash[0] = HASH_CARRO.get(codiBarres)[0];
-            valueHash[1] = (Integer.parseInt(HASH_CARRO.get(codiBarres)[1]) + unitats) + "";
-
-            HASH_CARRO.replace(codiBarres, valueHash);
-        }
-    }
-
-    /**
-     * Funcio per afegir al carro els productes per pasar per caixa
-     * @param codiBarres Parametre d'entrada que defineix part de la key del HashMap
-     * @param nom Parametre d'entrada per mostrar com a par dels values del HasMap
-     * @param preu Parametre d'entrada que defineix part de la key del HashMap
-     */
-    public static void afegirAlHash(String codiBarres, String nom, float preu){
-        int unitats = 1;
-        String key = codiBarres + preu;
+        String key = p.getCodiBarres() + p.getPreu();
 
         if(!(HASH_CARRO_CAIXA.containsKey(key))){
             String[] valueHash = new String[3];
-            valueHash[0] = nom;
+            valueHash[0] = p.getNom();
             valueHash[1] = unitats + "";
-            valueHash[2] = preu + "";
+            valueHash[2] = p.getPreu() + "";
 
             HASH_CARRO_CAIXA.put(key, valueHash);
 
@@ -149,9 +127,24 @@ public class Model {
             String[] valueHash = new String[3];
             valueHash[0] = HASH_CARRO_CAIXA.get(key)[0];
             valueHash[1] = (Integer.parseInt(HASH_CARRO_CAIXA.get(key)[1]) + unitats) + "";
-            valueHash[2] = preu + "";
+            valueHash[2] = p.getPreu() + "";
 
             HASH_CARRO_CAIXA.replace(key, valueHash);
+        }
+
+        if(!(HASH_CARRO.containsKey(p.getCodiBarres()))){
+            String[] valueHash = new String[2];
+            valueHash[0] = p.getNom();
+            valueHash[1] = unitats + "";
+
+            HASH_CARRO.put(p.getCodiBarres(), valueHash);
+
+        }else {
+            String[] valueHash = new String[2];
+            valueHash[0] = HASH_CARRO.get(p.getCodiBarres())[0];
+            valueHash[1] = (Integer.parseInt(HASH_CARRO.get(p.getCodiBarres())[1]) + unitats) + "";
+
+            HASH_CARRO.replace(p.getCodiBarres(), valueHash);
         }
     }
 
@@ -200,6 +193,12 @@ public class Model {
      * formatats, si el carro es buit mostrara un misatge
      */
     public static void carroActual(){
+        Collections.sort(CARRO);
+
+        for(Producte p: CARRO){
+            afegirAlHash(p);
+        }
+
         if(!HASH_CARRO.isEmpty()){
             Vista.mostrarCapcaleraCarro();
             HASH_CARRO.forEach((codiBarres, nomUnitats) -> Vista.mostrarMisatge("\t" + nomUnitats[0] + "\t-> \t\t" + nomUnitats[1]));
@@ -207,6 +206,8 @@ public class Model {
         }else {
             Vista.mostrarMisatge("El carro es buit");
         }
+        HASH_CARRO_CAIXA.clear();
+        HASH_CARRO.clear();
     }
 
     /**
@@ -214,6 +215,12 @@ public class Model {
      * esborra totes les llistes
      */
     public static void pasarPerCaixa(){
+        Collections.sort(CARRO);
+
+        for(Producte p: CARRO){
+            afegirAlHash(p);
+        }
+
         Vista.mostrarCompra();
         HASH_CARRO_CAIXA.forEach((key, nomUnitats) -> Vista.mostrarCaixa(nomUnitats[0] , nomUnitats[1] , nomUnitats[2] , ((Float.parseFloat(nomUnitats[2]) * Float.parseFloat(nomUnitats[1])) + "")));
         Vista.mostrarMisatge("");

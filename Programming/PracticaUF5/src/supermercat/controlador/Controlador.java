@@ -70,6 +70,12 @@ public class Controlador {
                                     Vista.mostrarMisatge("Afegir aliment");
                                     Vista.mostrarIntroduccioDades("Nom producte: ");
                                     nomA = SCN.nextLine();
+
+                                    if(nomA.length() > 15){
+                                        Vista.mostrarMisatge("nom reduit a 15 caracters");
+                                        nomA = nomA.substring(15);
+                                    }
+
                                     Vista.mostrarIntroduccioDades("Preu: ");
                                     preuA = SCN.nextFloat();
                                     SCN.nextLine();
@@ -78,13 +84,13 @@ public class Controlador {
                                     Vista.mostrarIntroduccioDades("Codi de barres: ");
                                     codiBarresA = SCN.nextLine();
 
-                                    if(nomA.length() > 15){
-                                        Vista.mostrarMisatge("nom reduit a 15 caracters");
-                                        nomA = nomA.substring(15);
+                                    if(!codiBarresA.matches("\\d+")){
+                                        Vista.mostrarMisatge("El codi de barres ha de ser numeric");
+                                    }else {
+                                        //afegir aliment
+                                        Model.afegirAliment(preuA, nomA, codiBarresA, Model.comprovarData(dataCaducitatA));
                                     }
 
-                                    //afegir aliment
-                                    Model.afegirAliment(preuA, nomA, codiBarresA, Model.comprovarData(dataCaducitatA));
 
                                 }catch (ParseException e){
                                     Vista.mostrarMisatge("Error al introduir la data");
@@ -111,6 +117,12 @@ public class Controlador {
                                     Vista.mostrarMisatge("Afegir textil");
                                     Vista.mostrarIntroduccioDades("Nom producte: ");
                                     nomT = SCN.nextLine();
+
+                                    if(nomT.length() > 15){
+                                        Vista.mostrarMisatge("nom reduit a 15 caracters");
+                                        nomT = nomT.substring(15);
+                                    }
+
                                     Vista.mostrarIntroduccioDades("Preu: ");
                                     preuT = SCN.nextFloat();
                                     SCN.nextLine();
@@ -119,16 +131,20 @@ public class Controlador {
                                     Vista.mostrarIntroduccioDades("Codi de barres: ");
                                     codiBarresT = SCN.nextLine();
 
-                                    if(nomT.length() > 15){
-                                        Vista.mostrarMisatge("nom reduit a 15 caracters");
-                                        nomT = nomT.substring(15);
+                                    if(!codiBarresT.matches("\\d+")){
+                                        Vista.mostrarMisatge("El codi de barres ha de ser numeric");
+                                    }else {
+                                        //afegir textil
+                                        Model.afegirTextil(preuT, nomT, codiBarresT, composicioT);
                                     }
 
-                                    //afegir textil
-                                    Model.afegirTextil(preuT, nomT, codiBarresT, composicioT);
 
                                 }catch(InputMismatchException e){
                                     Vista.mostrarMisatge("Error al introduir el preu");
+                                    Model.omplenaRegistreExcepcions(e);
+
+                                }catch (Exception e){
+                                    Vista.mostrarMisatge(e.getMessage());
                                     Model.omplenaRegistreExcepcions(e);
 
                                 }finally {
@@ -145,6 +161,12 @@ public class Controlador {
                                     Vista.mostrarMisatge("Afegir electronica");
                                     Vista.mostrarIntroduccioDades("Nom producte: ");
                                     nomE = SCN.nextLine();
+
+                                    if(nomE.length() > 15){
+                                        Vista.mostrarMisatge("nom reduit a 15 caracters");
+                                        nomE = nomE.substring(15);
+                                    }
+
                                     Vista.mostrarIntroduccioDades("Preu: ");
                                     preuE = SCN.nextFloat();
                                     SCN.nextLine();
@@ -154,16 +176,19 @@ public class Controlador {
                                     Vista.mostrarIntroduccioDades("Codi de barres: ");
                                     codiBarresE = SCN.nextLine();
 
-                                    if(nomE.length() > 15){
-                                        Vista.mostrarMisatge("nom reduit a 15 caracters");
-                                        nomE = nomE.substring(15);
+                                    if(!codiBarresE.matches("\\d+")){
+                                        Vista.mostrarMisatge("El codi de barres ha de ser numeric");
+                                    }else {
+                                        //afegir electronica
+                                        Model.afegirElectronica(preuE, nomE, codiBarresE, diesGarantiaE);
                                     }
-
-                                    //afegir electronica
-                                    Model.afegirElectronica(preuE, nomE, codiBarresE, diesGarantiaE);
 
                                 }catch(InputMismatchException e){
                                     Vista.mostrarMisatge("Error al introduir el preu");
+                                    Model.omplenaRegistreExcepcions(e);
+
+                                }catch (Exception e){
+                                    Vista.mostrarMisatge(e.getMessage());
                                     Model.omplenaRegistreExcepcions(e);
 
                                 }finally {

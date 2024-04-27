@@ -1,10 +1,11 @@
 package supermercat.constructors;
+import java.util.Comparator;
 
 /**
  * Clase general del tipus de productes, aquesta clase abstracte es la base per a crear cualsevol tipus de
  * producte en especific
  */
-public abstract class Producte{
+public abstract class Producte  implements Comparable <Producte>, Comparator<Producte> {
     //variables locals
     float preu;
     String nom, codiBarres;
@@ -46,5 +47,17 @@ public abstract class Producte{
         return codiBarres;
     }
 
+    /**
+     * Funcio comparadora, aquesta funcio compara els codis de barres per poder ordenar
+     * @param o Producte que volem comparar.
+     * @return retornara
+     */
+    public int compareTo(Producte o) {
+        return Integer.parseInt(codiBarres) - Integer.parseInt(o.getCodiBarres());
+    }
+
+    public int compare(Producte o1, Producte o2) {
+        return (int) (o1.getPreu() - o2.getPreu());
+    }
 }
 

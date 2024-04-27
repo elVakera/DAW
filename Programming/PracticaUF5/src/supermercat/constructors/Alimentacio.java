@@ -56,6 +56,7 @@ public class Alimentacio extends Producte{
         return this.preu = Model.preuAlimentacio(super.preu, getDataCaducitat());
     }
 
+
     /**
      * Funcio per mostrar l'objecte alimentacio com un String sobrescribint la toString generica
      * @return Retorna l'objecte alimentacio amb un format determinat
