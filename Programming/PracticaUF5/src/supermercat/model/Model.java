@@ -80,7 +80,7 @@ public class Model {
 
     public static void carroActual(){
         if(!CARRO.isEmpty()){
-            Vista.mostrarCapcalera();
+            Vista.mostrarCapcaleraCarro();
             for(Producte p : CARRO){
                 Vista.mostrarProductes(p.toString());
             }
