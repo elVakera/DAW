@@ -7,6 +7,10 @@ import java.text.ParseException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * Clase de control sobre les decision de l'usuari, aquesta clase s'encarrega d'enregistrar i gestionar les
+ * decisions preses per l'usuari
+ */
 public class Controlador {
     private static final Scanner SCN = new Scanner(System.in);
 
@@ -19,7 +23,6 @@ public class Controlador {
     }catch (StackOverflowError error){
         Vista.mostrarMisatge("Se lio parda");
     }
-
 
         do{
             Vista.mostrarMenuSuper();

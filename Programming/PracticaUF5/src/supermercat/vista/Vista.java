@@ -1,6 +1,10 @@
 package supermercat.vista;
 import supermercat.model.Model;
 
+/**
+ * Clase principal de mostrar dades, aquesta clase es l'encarregada de mostrar a l'usuari tot allo que necesita
+ * per utilizar l'aplicacio
+ */
 public class Vista {
     public static void mostrarMenuSuper(){
         System.out.println("\tBENVINGUT AL SUPERMERCAT");

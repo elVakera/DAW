@@ -1,7 +1,6 @@
 package supermercat.model;
 import supermercat.Constructors.*;
 import supermercat.vista.Vista;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -16,6 +15,10 @@ import java.util.regex.Pattern;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 
+/**
+ * Clase de manipulacio de dades, aquesta clase s'encarrega de gestionar les dades del programa per a tal de fer
+ * el que calgui per modificarles segons les indicacions del controlador
+ */
 public class Model {
     private static final int CAPACITAT_MAXIMA = 100;
     private static final ArrayList<Producte> CARRO = new ArrayList<>();
