@@ -13,8 +13,14 @@ public class Controlador {
     public static void supermercat(){
         String opSuper;
         boolean fiSupermercat;
-
+    try {
         Model.inicialitzaSuper();
+
+    }catch (StackOverflowError error){
+        Vista.mostrarMisatge("Se lio parda");
+    }
+
+
         do{
             Vista.mostrarMenuSuper();
             opSuper = SCN.nextLine();

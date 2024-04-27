@@ -92,11 +92,11 @@ public class Model {
         CARRO.clear();
     }
     public static void inicialitzaSuper(){
-        final String ARREL = "./PracticaUF5";
-        File carpetaUpdate = new File(ARREL + "/Updates");
-        File carpetaLogs = new File(ARREL + "/Logs");
-        File fitxerUpdate = new File(ARREL + "/Updates/UpdateTextilPrices.dat");
-        File fitxerLogs = new File(ARREL + "/Logs/Exceptions.dat");
+        final String ARREL = "./";
+        File carpetaUpdate = new File(ARREL + "Updates");
+        File carpetaLogs = new File(ARREL + "Logs");
+        File fitxerUpdate = new File(ARREL + "Updates/UpdateTextilPrices.dat");
+        File fitxerLogs = new File(ARREL + "Logs/Exceptions.dat");
 
         try {
             creaCarpeta(carpetaLogs);
@@ -109,9 +109,26 @@ public class Model {
         }
 
     }
+
+    public static void creaCarpeta(File carpeta) throws Exception{
+        if(carpeta.mkdirs()){
+            Vista.mostrarMisatge("La carpeta " + carpeta.getName() + " creada correctament");
+        }else {
+            Vista.mostrarMisatge("La carpeta " + carpeta.getName() + " ja existeix");
+        }
+    }
+
+    public static void creaFitxers(File arxiu)throws Exception{
+        if(arxiu.createNewFile()){
+            Vista.mostrarMisatge("Arxiu " + arxiu.getName() + " creat correctament");
+        }else {
+            Vista.mostrarMisatge("L'arxiu " + arxiu.getName() + " ja existeix");
+        }
+    }
+
     public static void omplenaRegistreErrors(Exception eIn){
         try {
-            final String ARREL_LOGS = "./PracticaUF5/Logs/Exceptions.dat";
+            final String ARREL_LOGS = "./Logs/Exceptions.dat";
             File rutaLogs = new File(ARREL_LOGS);
             FileOutputStream obrirAlFinal = new FileOutputStream(rutaLogs, true);
             PrintStream writerLogs = new PrintStream(obrirAlFinal);
@@ -124,18 +141,5 @@ public class Model {
             omplenaRegistreErrors(e);
         }
     }
-    public static void creaCarpeta(File carpeta) throws Exception{
-        if(carpeta.mkdir()){
-            Vista.mostrarMisatge("La carpeta " + carpeta.getName() + " creada correctament");
-        }else {
-            Vista.mostrarMisatge("La carpeta " + carpeta.getName() + " ja existeix");
-        }
-    }
-    public static void creaFitxers(File arxiu)throws Exception{
-        if(arxiu.createNewFile()){
-            Vista.mostrarMisatge("Arxiu " + arxiu.getName() + " creat correctament");
-        }else {
-            Vista.mostrarMisatge("L'arxiu " + arxiu.getName() + " ja existeix");
-        }
-    }
+
 }
