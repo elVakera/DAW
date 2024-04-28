@@ -1,10 +1,7 @@
 package supermercat.model;
 import supermercat.constructors.*;
 import supermercat.vista.Vista;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.PrintStream;
+import java.io.*;
 import java.text.ParseException;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -21,6 +18,7 @@ public class Model {
     private static final int CAPACITAT_MAXIMA = 100;
     private static final ArrayList<Producte> CARRO = new ArrayList<>();
     private static final ArrayList<Producte> CARRO_TEXTIL = new ArrayList<>();
+    private static final HashMap<String, String> DOCUMENT = new HashMap<>();
     private static final LinkedHashMap<String,String[]> HASH_CARRO = new LinkedHashMap<>();
     private static final LinkedHashMap<String,String[]> HASH_CARRO_CAIXA = new LinkedHashMap<>();
 
@@ -33,9 +31,9 @@ public class Model {
     }
 
     /**
-     *
-     * @param codiBarres
-     * @return
+     * Funcio per comprovar el codi de barres, aquesta funcio ens dira si existeix el codi de barres al carro
+     * @param codiBarres Parametre d'entrada de tipus String que compararem
+     * @return retornara true si existeix al carro o false si no
      */
     public static boolean comprovarCodiBarres(String codiBarres){
         boolean existeix = false;
@@ -167,7 +165,8 @@ public class Model {
      */
     public static String mostrarDataActual(){
         LocalDateTime avui = LocalDateTime.now();
-        return avui.getDayOfMonth() + "/" + avui.getMonthValue() + "/" + avui.getYear() + "\t" + avui.getHour() + ":" + avui.getMinute() + ":" + avui.getSecond();
+        return avui.getDayOfMonth() + "/" + avui.getMonthValue() + "/" + avui.getYear() + "\t" + avui.getHour() +
+                                      ":" + avui.getMinute() + ":" + avui.getSecond();
     }
 
     /**
@@ -213,7 +212,8 @@ public class Model {
 
         if(!HASH_CARRO.isEmpty()){
             Vista.mostrarCapcaleraCarro();
-            HASH_CARRO.forEach((codiBarres, nomUnitats) -> Vista.mostrarMisatge("\t" + nomUnitats[0] + "\t-> \t\t" + nomUnitats[1]));
+            HASH_CARRO.forEach((codiBarres, nomUnitats) -> Vista.mostrarMisatge("\t" + nomUnitats[0] +
+                                                                                     "\t-> \t\t" + nomUnitats[1]));
 
         }else {
             Vista.mostrarMisatge("El carro es buit");
@@ -234,7 +234,11 @@ public class Model {
         }
 
         Vista.mostrarCompra();
-        HASH_CARRO_CAIXA.forEach((key, nomUnitats) -> Vista.mostrarCaixa(nomUnitats[0] , nomUnitats[1] , nomUnitats[2] , ((Float.parseFloat(nomUnitats[2]) * Float.parseFloat(nomUnitats[1])) + "")));
+        HASH_CARRO_CAIXA.forEach((key, nomUniPre) -> Vista.mostrarCaixa(nomUniPre[0] ,
+                                                                         nomUniPre[1] ,
+                                                                         nomUniPre[2] ,
+                                                                         ((Float.parseFloat(nomUniPre[2]) *
+                                                                                 Float.parseFloat(nomUniPre[1])) + "")));
         Vista.mostrarMisatge("");
         CARRO.clear();
         HASH_CARRO_CAIXA.clear();
@@ -257,11 +261,16 @@ public class Model {
             creaCarpeta(carpetaUpdate);
             creaFitxers(fitxerLogs);
             creaFitxers(fitxerUpdate);
+            guardarDocument();
 
-        }catch (FileNotFoundException e){
+        }catch (IOException e){
             Vista.mostrarMisatge(e.getMessage());
-        } catch (Exception e) {
+            omplenaRegistreExcepcions(e);
+
+        }catch (Exception e) {
+            omplenaRegistreExcepcions(e);
             throw new RuntimeException(e);
+
         }
     }
 
@@ -271,7 +280,7 @@ public class Model {
      * @param carpeta Parametre d'entrada de tipus File que defineix el desti i nom de la carpeta
      * @throws FileNotFoundException Si no troba la ruta es pot produir una excepcio
      */
-    public static void creaCarpeta(File carpeta) throws FileNotFoundException{
+    private static void creaCarpeta(File carpeta) throws FileNotFoundException{
         if(carpeta.mkdirs()){
             Vista.mostrarMisatge("La carpeta " + carpeta.getName() + " creada correctament");
         }else {
@@ -285,7 +294,7 @@ public class Model {
      * @param arxiu Parametre d'entrada de tipus File que defineix el desti i nom del fixer
      * @throws Exception Es pot produir una excepcio a l'hora de crear el fitxer amb la ruta
      */
-    public static void creaFitxers(File arxiu)throws Exception{
+    private static void creaFitxers(File arxiu)throws Exception{
         if(arxiu.createNewFile()){
             Vista.mostrarMisatge("Arxiu " + arxiu.getName() + " creat correctament");
         }else {
@@ -311,6 +320,24 @@ public class Model {
         }catch (FileNotFoundException e){
             Vista.mostrarMisatge("No s'ha trobat l'arxiu/carpeta");
             omplenaRegistreExcepcions(e);
+        }
+    }
+
+    /**
+     *
+     * @throws IOException
+     */
+    public static void guardarDocument() throws IOException{
+
+        File rutaFitxer = new File("./Updates/UpdateTextilPrices.dat");
+
+        String linea;
+        FileReader rdr = new FileReader(rutaFitxer);
+        BufferedReader brdr = new BufferedReader(rdr);
+
+        while ((linea = brdr.readLine()) != null){
+            String[] valor = linea.split(";");
+            DOCUMENT.put(valor[0], valor[1]);
         }
     }
 
