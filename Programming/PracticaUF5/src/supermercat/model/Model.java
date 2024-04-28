@@ -20,6 +20,7 @@ public class Model {
     //variables constants
     private static final int CAPACITAT_MAXIMA = 100;
     private static final ArrayList<Producte> CARRO = new ArrayList<>();
+    private static final ArrayList<Producte> CARRO_TEXTIL = new ArrayList<>();
     private static final LinkedHashMap<String,String[]> HASH_CARRO = new LinkedHashMap<>();
     private static final LinkedHashMap<String,String[]> HASH_CARRO_CAIXA = new LinkedHashMap<>();
 
@@ -29,6 +30,22 @@ public class Model {
      */
     private static boolean comprovaCapacitat(){
         return CARRO.size() == CAPACITAT_MAXIMA;
+    }
+
+    /**
+     *
+     * @param codiBarres
+     * @return
+     */
+    public static boolean comprovarCodiBarres(String codiBarres){
+        boolean existeix = false;
+        for (Producte p : CARRO_TEXTIL){
+            if(p.getCodiBarres().matches(codiBarres)){
+                existeix = true;
+                break;
+            }
+        }
+        return existeix;
     }
 
     /**
@@ -57,8 +74,6 @@ public class Model {
         if(!comprovaCapacitat()){
             CARRO.add(new Alimentacio(preu, nom, codiBarres, dataCaducitat));
             Vista.mostrarMisatge("Aliment afegit al carro");
-            //afegirAlHash(codiBarres, nom);
-            //afegirAlHash(codiBarres, nom, preu);
 
         }else {
             Vista.mostrarMisatge("Carro complet");
@@ -76,10 +91,9 @@ public class Model {
      */
     public static void afegirTextil(float preu, String nom, String codiBarres, String composicio){
         if(!comprovaCapacitat()){
+            CARRO_TEXTIL.add(new Textil(preu, nom, codiBarres, composicio));
             CARRO.add(new Textil(preu, nom, codiBarres, composicio));
             Vista.mostrarMisatge("Textil afegit al carro");
-            //afegirAlHash(codiBarres, nom);
-            //afegirAlHash(codiBarres, nom, preu);
 
         }else {
             Vista.mostrarMisatge("Carro complet");
@@ -99,8 +113,6 @@ public class Model {
         if (!comprovaCapacitat()) {
             CARRO.add(new Electronica(preu, nom, codiBarres, diesGarantia));
             Vista.mostrarMisatge("Electronica afegida al carro");
-            //afegirAlHash(codiBarres, nom);
-            //afegirAlHash(codiBarres, nom, preu);
 
         }else {
             Vista.mostrarMisatge("Carro complet");
@@ -116,12 +128,12 @@ public class Model {
         String key = p.getCodiBarres() + p.getPreu();
 
         if(!(HASH_CARRO_CAIXA.containsKey(key))){
-            String[] valueHash = new String[3];
-            valueHash[0] = p.getNom();
-            valueHash[1] = unitats + "";
-            valueHash[2] = p.getPreu() + "";
+            String[] valueCaixa = new String[3];
+            valueCaixa[0] = p.getNom();
+            valueCaixa[1] = unitats + "";
+            valueCaixa[2] = p.getPreu() + "";
 
-            HASH_CARRO_CAIXA.put(key, valueHash);
+            HASH_CARRO_CAIXA.put(key, valueCaixa);
 
         }else {
             String[] valueHash = new String[3];
@@ -178,7 +190,7 @@ public class Model {
      *             d'alimentacio
      * @param dataCaducitat Parametre d'entrada definit al constructor d'alimentacio per definir la data de caducitat
      *                     d'un producte d'alimentacio
-     * @return
+     * @return Retorna el resultat numeric amb decimals que definira el preu d'un producte d'alimentacio
      */
     public static float preuAlimentacio(float preu, Date dataCaducitat){
         Date actual = new Date();

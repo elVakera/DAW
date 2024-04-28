@@ -131,11 +131,18 @@ public class Controlador {
                                     Vista.mostrarIntroduccioDades("Codi de barres: ");
                                     codiBarresT = SCN.nextLine();
 
+                                    //comprova que el codi de barres sigui numeric y que no es repeteixi
                                     if(!codiBarresT.matches("\\d+")){
                                         Vista.mostrarMisatge("El codi de barres ha de ser numeric");
+
                                     }else {
-                                        //afegir textil
-                                        Model.afegirTextil(preuT, nomT, codiBarresT, composicioT);
+                                        if(!Model.comprovarCodiBarres(codiBarresT)){
+                                            Model.afegirTextil(preuT, nomT, codiBarresT, composicioT);  //afegir textil
+
+                                        }else {
+                                            Vista.mostrarMisatge("Dos productes textils no poden tenir el mateix codi de barres");
+                                        }
+
                                     }
 
 
