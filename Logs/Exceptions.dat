@@ -1,0 +1,7 @@
+Exception trobada a 27/4/2024	19:52:45: For input string: "poma1"
+Exception trobada a 27/4/2024	20:42:32: Cannot load from object array because the return value of "java.util.LinkedHashMap.get(Object)" is null
+Exception trobada a 27/4/2024	21:28:35: null
+Exception trobada a 27/4/2024	21:29:47: null
+Exception trobada a 27/4/2024	21:32:54: null
+Exception trobada a 28/4/2024	0:45:42: Unparseable date: "1"
+Exception trobada a 28/4/2024	1:27:8: null

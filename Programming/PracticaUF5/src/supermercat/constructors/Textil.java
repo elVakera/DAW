@@ -52,7 +52,6 @@ public class Textil extends Producte{
         return preu;
     }
 
-
     /**
      * Funcio per mostrar l'objecte textil com un String sobrescribint la toString generica
      * @return Retorna l'objecte textil amb un format determinat
@@ -61,10 +60,10 @@ public class Textil extends Producte{
     public String toString() {
         //si el preu es inferior o igual a 0 sera 0
         if(getPreu() <= 0){
-            return String.format("\t%-15s\t%-12s\t%-8s\n", super.getNom(), super.getCodiBarres(), 0);
+            return String.format("\t%-15s\t%-12s\t%-8s\t%-15s\n", super.getNom(), super.getCodiBarres(), 0, getComposicioTextil());
 
         }else {
-            return String.format("\t%-15s\t%-12s\t%-8.2f\n", super.getNom(), super.getCodiBarres(), getPreu());
+            return String.format("\t%-15s\t%-12s\t%-8.2f\t%-15s\n", super.getNom(), super.getCodiBarres(), getPreu(), getComposicioTextil());
 
         }
     }

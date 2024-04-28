@@ -53,7 +53,12 @@ public class Vista {
         System.out.println("\t0) Tornar");
         System.out.println();
     }
-
+    public static void mostrarPreuFinal(String totalCaixa){
+        System.out.println();
+        System.out.println();
+        System.out.printf("\t%-20s %s", "Total a pagar: ",totalCaixa);
+        System.out.println();
+    }
     /**
      * Funcio per generar una capçalera de compra en un format determinat
      */
@@ -62,7 +67,7 @@ public class Vista {
     }
 
     public static void mostrarCaixa( String nom, String unitats, String preuU, String preuT){
-        System.out.printf("\t%-15s\t%-12s\t%-8s\t%-8s\n", nom, unitats, preuU, preuT);
+        System.out.printf("\t%-15s\t%-12s\t%-12s\t%-8s\n", nom, unitats, preuU, preuT);
     }
 
     /**

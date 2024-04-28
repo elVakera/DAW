@@ -5,6 +5,7 @@ import java.io.*;
 import java.text.ParseException;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.regex.Pattern;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -131,6 +132,24 @@ public class Model {
             valueCaixa[1] = unitats + "";
             valueCaixa[2] = p.getPreu() + "";
 
+            //si pertenece a textil
+            if(p instanceof Textil){
+                for(Map.Entry<String, String> doc : DOCUMENT.entrySet()){
+                    String valorDoc = doc.getValue();   //valor preu
+                    String valorKey = doc.getKey();     //valor codi barres
+
+                    //si coinciden los codigos de barras pero no el precio
+                    if(valorKey.equals(p.getCodiBarres())){
+                        if(!(p.getPreu() + "").equals(valorDoc)){
+                            valueCaixa[2] = valorDoc;       //modifica el valor al del doc
+
+                        }else {
+                            valueCaixa[2] = p.getPreu() + "";   //modifica el valor al del preu
+                        }
+                    }
+                }
+            }
+
             HASH_CARRO_CAIXA.put(key, valueCaixa);
 
         }else {
@@ -141,7 +160,6 @@ public class Model {
 
             HASH_CARRO_CAIXA.replace(key, valueHash);
         }
-
         if(!(HASH_CARRO.containsKey(p.getCodiBarres()))){
             String[] valueHash = new String[2];
             valueHash[0] = p.getNom();
@@ -167,6 +185,20 @@ public class Model {
         LocalDateTime avui = LocalDateTime.now();
         return avui.getDayOfMonth() + "/" + avui.getMonthValue() + "/" + avui.getYear() + "\t" + avui.getHour() +
                                       ":" + avui.getMinute() + ":" + avui.getSecond();
+    }
+
+    /**
+     * Funcio calcula el preu total, aquesta funcio calcula el preu total a partir de la multiplicacio del preu i les
+     * unitats de tots eles productes i despres suma aquest resultat i el guarda en una variable de referencia atomica
+     * @return Retorna el valor de la variable String total que te el resultat del calcul del preu total
+     */
+    private static String calcularPreuTotal(){
+        String total;
+        AtomicReference<Float> totalPagar = new AtomicReference<>(0f);
+        HASH_CARRO_CAIXA.forEach((key, nomUniPre) -> totalPagar.updateAndGet(suma -> suma + (Float.parseFloat(nomUniPre[2]) *
+                                                                                        Float.parseFloat(nomUniPre[1]))));
+        total = totalPagar + " €";
+        return total;
     }
 
     /**
@@ -227,6 +259,7 @@ public class Model {
      * esborra totes les llistes
      */
     public static void pasarPerCaixa(){
+
         Collections.sort(CARRO);
 
         for(Producte p: CARRO){
@@ -239,8 +272,10 @@ public class Model {
                                                                          nomUniPre[2] ,
                                                                          ((Float.parseFloat(nomUniPre[2]) *
                                                                                  Float.parseFloat(nomUniPre[1])) + "")));
-        Vista.mostrarMisatge("");
+        Vista.mostrarPreuFinal(calcularPreuTotal());
+        Vista.mostrarMisatge(" ");
         CARRO.clear();
+        CARRO_TEXTIL.clear();
         HASH_CARRO_CAIXA.clear();
         HASH_CARRO.clear();
     }
@@ -324,21 +359,18 @@ public class Model {
     }
 
     /**
-     *
-     * @throws IOException
+     * Funcion guarda un document, aquesta funcio llegeix i guarda un document dins d'un HashMap
+     * @throws IOException Aquesta funcio por llençar una Excepcio si no troba el fitxer o no pot llegir una linea
      */
-    public static void guardarDocument() throws IOException{
-
+    private static void guardarDocument() throws IOException{
         File rutaFitxer = new File("./Updates/UpdateTextilPrices.dat");
-
-        String linea;
+        String linea, separador = ";";
         FileReader rdr = new FileReader(rutaFitxer);
         BufferedReader brdr = new BufferedReader(rdr);
 
         while ((linea = brdr.readLine()) != null){
-            String[] valor = linea.split(";");
+            String[] valor = linea.split(separador);
             DOCUMENT.put(valor[0], valor[1]);
         }
     }
-
 }

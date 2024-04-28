@@ -68,7 +68,7 @@ public class Controlador {
                                     float preuA;
 
                                     Vista.mostrarMisatge("Afegir aliment");
-                                    Vista.mostrarIntroduccioDades("Nom producte: ");
+                                    Vista.mostrarIntroduccioDades("(15 Digits Max) Nom producte: ");
                                     nomA = SCN.nextLine();
 
                                     if(nomA.length() > 15){
@@ -84,13 +84,13 @@ public class Controlador {
                                     Vista.mostrarIntroduccioDades("Codi de barres: ");
                                     codiBarresA = SCN.nextLine();
 
-                                    if(!codiBarresA.matches("\\d+")){
-                                        Vista.mostrarMisatge("El codi de barres ha de ser numeric");
+                                    if(!codiBarresA.matches("\\d{1,4}")){
+                                        Vista.mostrarMisatge("El codi de barres ha de ser numeric i maxim 4 digits");
+
                                     }else {
                                         //afegir aliment
                                         Model.afegirAliment(preuA, nomA, codiBarresA, Model.comprovarData(dataCaducitatA));
                                     }
-
 
                                 }catch (ParseException e){
                                     Vista.mostrarMisatge("Error al introduir la data");
@@ -115,7 +115,7 @@ public class Controlador {
                                     float preuT;
 
                                     Vista.mostrarMisatge("Afegir textil");
-                                    Vista.mostrarIntroduccioDades("Nom producte: ");
+                                    Vista.mostrarIntroduccioDades("(15 Digits Max) Nom producte: ");
                                     nomT = SCN.nextLine();
 
                                     if(nomT.length() > 15){
@@ -132,8 +132,8 @@ public class Controlador {
                                     codiBarresT = SCN.nextLine();
 
                                     //comprova que el codi de barres sigui numeric y que no es repeteixi
-                                    if(!codiBarresT.matches("\\d+")){
-                                        Vista.mostrarMisatge("El codi de barres ha de ser numeric");
+                                    if(!codiBarresT.matches("\\d{1,4}")){
+                                        Vista.mostrarMisatge("El codi de barres ha de ser numeric i maxim 4 digits");
 
                                     }else {
                                         if(!Model.comprovarCodiBarres(codiBarresT)){
@@ -142,9 +142,7 @@ public class Controlador {
                                         }else {
                                             Vista.mostrarMisatge("Dos productes textils no poden tenir el mateix codi de barres");
                                         }
-
                                     }
-
 
                                 }catch(InputMismatchException e){
                                     Vista.mostrarMisatge("Error al introduir el preu");
@@ -166,7 +164,7 @@ public class Controlador {
                                     float preuE;
 
                                     Vista.mostrarMisatge("Afegir electronica");
-                                    Vista.mostrarIntroduccioDades("Nom producte: ");
+                                    Vista.mostrarIntroduccioDades("(15 Digits Max) Nom producte: ");
                                     nomE = SCN.nextLine();
 
                                     if(nomE.length() > 15){
@@ -183,15 +181,16 @@ public class Controlador {
                                     Vista.mostrarIntroduccioDades("Codi de barres: ");
                                     codiBarresE = SCN.nextLine();
 
-                                    if(!codiBarresE.matches("\\d+")){
-                                        Vista.mostrarMisatge("El codi de barres ha de ser numeric");
+                                    if(!codiBarresE.matches("\\d{1,4}")){
+                                        Vista.mostrarMisatge("El codi de barres ha de ser numeric i maxim 4 digits");
+
                                     }else {
                                         //afegir electronica
                                         Model.afegirElectronica(preuE, nomE, codiBarresE, diesGarantiaE);
                                     }
 
                                 }catch(InputMismatchException e){
-                                    Vista.mostrarMisatge("Error al introduir el preu");
+                                    Vista.mostrarMisatge("Error al introduir el dies de garantia o preu");
                                     Model.omplenaRegistreExcepcions(e);
 
                                 }catch (Exception e){
