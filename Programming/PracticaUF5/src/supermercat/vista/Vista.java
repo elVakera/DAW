@@ -66,8 +66,26 @@ public class Vista {
         System.out.printf("\t%-15s\t%-12s\t%-8s\t%-8s\n", "Nom", "Unitats", "Preu Unitari", "Preu Total");
     }
 
-    public static void mostrarCaixa( String nom, String unitats, String preuU, String preuT){
+    /**
+     * Funcio mostra producte a caixa, a partir d'uns parametres d'entrada es mostrara un misatge formatat de una manera
+     * determinada amb ells
+     * @param nom Parametre d'entrada de tipus String que volem printar
+     * @param unitats Parametre d'entrada de tipus String que volem printar
+     * @param preuU Parametre d'entrada de tipus String que volem printar
+     * @param preuT Parametre d'entrada de tipus String que volem printar
+     */
+    public static void mostrarCaixa(String nom, String unitats, String preuU, String preuT){
         System.out.printf("\t%-15s\t%-12s\t%-12s\t%-8s\n", nom, unitats, preuU, preuT);
+    }
+
+    /**
+     * Funcio mostra carro, a partir d'uns parametres d'entrada mostrara un misatge formatat d'una manera determinada
+     * @param nom Parametre d'entrada de tipus String que volem printar
+     * @param unitats Parametre d'entrada de tipus String que volem printar
+     */
+    public static void mostrarCarro(String nom, String unitats){
+        String separador = "->";
+        System.out.printf("\t%-15s\t%-4s\t%-10s\n", nom, separador, unitats);
     }
 
     /**
@@ -87,6 +105,6 @@ public class Vista {
      * Funcio que genera una capçalera per a mostrar el carro en un format determinat
      */
     public static void mostrarCapcaleraCarro(){
-        System.out.printf("\t%-15s\t%-12s\n", "Nom", "Unitats");
+        System.out.printf("\t%-21s\t%-18s\n", "Nom", "Unitats");
     }
 }

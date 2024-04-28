@@ -54,10 +54,40 @@ public class Model {
      * @return Retorna el parametre d'entrada parsejat a tipus Date
      * @throws ParseException Si no es pot parsejar perque no te el format d'String correcte es llençara una excepcio
      */
-    public  static Date comprovarData(String dataIn) throws ParseException{
+    public static Date comprovarData(String dataIn) throws ParseException{
         Pattern format = Pattern.compile("dd/MM/yyyy");
         SimpleDateFormat formato = new SimpleDateFormat(format.pattern());
         return formato.parse(dataIn);
+    }
+
+    /**
+     * Funcio busca producte, a partir d'un parametre d'entrada comprovarem si el carro es buit, si no ho esta
+     * comprovara el codi de barres de tots els productes amb el parametre d'entrada, si el troba et dira el seu nom i
+     * sino avisara que no ho ha trobat
+     * @param codiBarres Parametre d'entrada de tipus String que es comparara amb els codis de barres del carro
+     * @return Retorna verdader o fals depenent de si el troba o no
+     */
+    public static Boolean trobarProducte(String codiBarres){
+        boolean existeix = false;
+
+        if (!(CARRO.isEmpty())){
+            Optional<Producte> producte = CARRO.stream().filter(finder -> codiBarres.equals(finder.getCodiBarres()))
+                                                                                    .findFirst();                       //buscardins del carro si existeix
+
+            if (producte.isPresent()) {
+                Vista.mostrarMisatge("El producte existeix i es: " + producte.get().getNom());
+                existeix = true;
+
+            } else {
+                System.out.println("El codi introduït no existeix al carro");
+                existeix = false;
+            }
+        } else {
+            System.out.println("El carro és buit");
+
+        }
+
+        return existeix;
     }
 
     /**
@@ -239,13 +269,15 @@ public class Model {
         Collections.sort(CARRO);
 
         for(Producte p: CARRO){
+            if(p instanceof Textil){
+
+            }
             afegirAlHash(p);
         }
 
         if(!HASH_CARRO.isEmpty()){
             Vista.mostrarCapcaleraCarro();
-            HASH_CARRO.forEach((codiBarres, nomUnitats) -> Vista.mostrarMisatge("\t" + nomUnitats[0] +
-                                                                                     "\t-> \t\t" + nomUnitats[1]));
+            HASH_CARRO.forEach((codiBarres, nomUnitats) -> Vista.mostrarCarro(nomUnitats[0], nomUnitats[1]));
 
         }else {
             Vista.mostrarMisatge("El carro es buit");
@@ -259,7 +291,6 @@ public class Model {
      * esborra totes les llistes
      */
     public static void pasarPerCaixa(){
-
         Collections.sort(CARRO);
 
         for(Producte p: CARRO){

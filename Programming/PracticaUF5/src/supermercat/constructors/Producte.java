@@ -50,12 +50,18 @@ public abstract class Producte  implements Comparable <Producte>, Comparator<Pro
     /**
      * Funcio comparadora, aquesta funcio compara els codis de barres per poder ordenar
      * @param o Producte que volem comparar.
-     * @return retornara
+     * @return Retornara positiu o negatiu o 0 segon si el Producte es mes gran mes petit o igual
      */
     public int compareTo(Producte o) {
         return Integer.parseInt(codiBarres) - Integer.parseInt(o.getCodiBarres());
     }
 
+    /**
+     * Funcio comparadora, aquesta funcio comparara el preu de 2 objectes per ordenarlos
+     * @param o1 Parametre d'entrada de tipus Producte el cual compararem en primer lloc
+     * @param o2 Parametre d'entrada de tipus Producte el cual el amb el del primer lloc
+     * @return
+     */
     public int compare(Producte o1, Producte o2) {
         return (int) (o1.getPreu() - o2.getPreu());
     }

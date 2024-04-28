@@ -128,6 +128,10 @@ public class Controlador {
                                     SCN.nextLine();
                                     Vista.mostrarIntroduccioDades("Composicio: ");
                                     composicioT = SCN.nextLine();
+
+                                    if (!composicioT.matches("^[a-zA-Z]+$")){
+                                        throw new IllegalArgumentException("La composicio no pot tenir numeros");
+                                    }
                                     Vista.mostrarIntroduccioDades("Codi de barres: ");
                                     codiBarresT = SCN.nextLine();
 
@@ -140,7 +144,24 @@ public class Controlador {
                                             Model.afegirTextil(preuT, nomT, codiBarresT, composicioT);  //afegir textil
 
                                         }else {
+
                                             Vista.mostrarMisatge("Dos productes textils no poden tenir el mateix codi de barres");
+                                            Boolean codiBo = false;
+
+                                            do{
+                                                String codiProva;
+
+                                                Vista.mostrarIntroduccioDades("Introdueix codi de barres que vulguis comprovar: ");
+                                                codiProva =SCN.nextLine();
+                                                if(!codiBarresT.matches("\\d{1,4}")){
+                                                    Vista.mostrarMisatge("El codi de barres ha de ser numeric i maxim 4 digits");
+
+                                                }else {
+                                                    codiBo = Model.trobarProducte(codiProva);
+                                                }
+
+                                            }while (codiBo);
+                                            Model.afegirTextil(preuT, nomT, codiBarresT, composicioT);  //afegir textil
                                         }
                                     }
 
