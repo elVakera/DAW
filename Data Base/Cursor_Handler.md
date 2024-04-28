@@ -1,3 +1,4 @@
+~~~ mysql
 -- Exercici 1 
 
 use rrhh;
@@ -441,3 +442,4 @@ DELIMITER //
 CALL spCalcularImport();
 
 SELECT * FROM factura;
+~~~
