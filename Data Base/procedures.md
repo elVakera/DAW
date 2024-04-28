@@ -1,3 +1,4 @@
+~~~ mysql
 # enunciats de procediments
 
 -- Exercici 1
@@ -197,3 +198,4 @@ END
 
 -- END
 -- // DELIMITER ;
+@@@  
