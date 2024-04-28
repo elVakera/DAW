@@ -1,3 +1,4 @@
+~~~ mysql
 # enunciats de funcions
 
 -- Exercici 1
@@ -130,3 +131,4 @@ END //
 DELIMITER ;
 
 SELECT spDirectors()
+~~~
