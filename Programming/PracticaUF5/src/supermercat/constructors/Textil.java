@@ -67,14 +67,4 @@ public class Textil extends Producte{
 
         }
     }
-
-    /**
-     * Funcio comparadora, aquesta funcio compara la composicio textil per poder ordenar
-     * @param o Producte que volem comparar.
-     * @return Retornara positiu o negatiu o 0 segon si el Producte es mes gran mes petit o igual
-     */
-    @Override
-    public int compareTo(Producte o){
-        return composicioTextil.length() - ((Textil) o).getComposicioTextil().length();
-    }
 }
