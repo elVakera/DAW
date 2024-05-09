@@ -1,8 +1,3 @@
-# DAW-IPOP-23/24
-  https://github.com/elVakera/daw-ipop-2324/blob/main/IPOP-Fitxa1b-Sa%20Palomera.docx
-
-  https://github.com/elVakera/daw-ipop-2324/blob/main/IPOP-Fitxa2b-Sa%20Palomera.docx
-***
 # Projección Profesional
 
 ## - Objetivos Profesionales
