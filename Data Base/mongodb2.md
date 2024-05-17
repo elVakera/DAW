@@ -25,7 +25,7 @@ db.students.find({"birth_year":{$lte:1990}})
 ~~~~ 
 7. Busca els estudiants nascuts a la dècada dels 90s
 ~~~~javascript
-db.students.find({$and:[{"birth_year":{$gte:1990}},{"birth_year":{$lte:2000}}]})
+db.students.find({$and:[{"birth_year":{$gte:1990}},{"birth_year":{$lte:1999}}]})
 ~~~~ 
 8. Busca els estudiants de gènere femani nascus a la dècada dels 90s
 ~~~~javascript
@@ -73,23 +73,23 @@ db.students.find({"phone": /^622/})
 ~~~~ 
 19. Busca els estudiants que el seu dni comenci i acabi amb una lletra
 ~~~~javascript
-db.students.find({"dni": /^[a-z]$/})
+db.students.find({"dni": /^[a-z].+[a-z]$/i})
 ~~~~ 
 20. Busca els estudiants que el seu nom comenci per una vocal
 ~~~~javascript
-
+db.students.find({"name": /^[aeiou]/i})
 ~~~~ 
 21. Busca els estudiants que el seu nom sigui compost
 ~~~~javascript
-
+db.students.find({"name": /\s/)
 ~~~~ 
 22. Busca els estudiants amb un nom més llarg de 13 caràcters
 ~~~~javascript
-
+db.students.find({$where: "(this.name.length > 13)"})
 ~~~~ 
 23. Busca els estudiants amb 3 o més vocals en el seu nom
 ~~~~javascript
-
+db.students.find({"name":/.*[aeiouàáèéíóòú]{3,}.*/i})
 ~~~~ 
 # Base de dades edx – col·lecció bios
 24. Busca aquells desenvolupadors que han realitzat contribucions en OOP
