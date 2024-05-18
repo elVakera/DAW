@@ -1,4 +1,31 @@
 # Triggers
+Ex 1
+
+ INSERT:
+
+|  | before | after |
+| ----|---|---|
+| NEW | M | X |
+| OLD | X | X |
+
+ DELETE:
+
+|  | before | after |
+| ----|---|---|
+| NEW | X | X |
+| OLD | L | X |
+
+ UPDATE:
+
+|  | before | after |
+| ----|---|---|
+| NEW | M | X |
+| OLD | X | L |
+
+Ex 2
+~~~ mysql
+SELECT * FROM INFORMATION_SCHEMA.TRIGGERS
+~~~
 Ex 3
 ~~~ mysql
 CREATE TABLE auditoria_taules(
