@@ -90,7 +90,7 @@ WHERE empleat_id=1000;
 SELECT * FROM empleats;
 SELECT * FROM auditoria_taules
 ~~~
--- Exercici 4
+Ex 4
 ~~~ mysql
 DROP TRIGGER IF EXISTS trg_salari_empleats;
 DELIMITER //
