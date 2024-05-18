@@ -1,13 +1,14 @@
-~~~ mysql
-# enunciats de funcions
+# Functions
 
--- Exercici 1
+Ex 1
+~~~ mysql
 CREATE FUNCTION spData (data DATE) RETURNS char(10)
 BEGIN
 	RETURN DATE_FORMAT(data,"%d-%m-%Y");
 END
-
--- Exercici 2
+~~~
+Ex 2
+~~~ mysql
 DROP FUNCTION IF EXISTS spPotencia;
 CREATE FUNCTION spPotencia (pbase INT,pexp INT) RETURNS INT
 BEGIN
@@ -24,8 +25,9 @@ BEGIN
     END IF;
 	RETURN res;
 END;
-
--- Exercici 4
+~~~
+Ex 4
+~~~ mysql
 DROP FUNCTION IF EXISTS spPringat;
 use rrhh;
 DELIMITER //
@@ -46,9 +48,10 @@ BEGIN
     RETURN vcodiEmp;
 END
 // DELIMITER;
-
 SELECT spPringat(20)
-
+~~~
+Ex 5
+~~~ mysql
 DELIMITER //
 CREATE FUNCTION spComprovarDep(pdepId INT) RETURNS BOOLEAN
 NOT DETERMINISTIC READS SQL DATA
@@ -62,8 +65,9 @@ BEGIN
 END
 // DELIMITER ;
 
-
--- Exercici 6
+~~~
+Ex 6
+~~~ mysql
 DROP FUNCTION IF EXISTS spCategoria;
 
 DELIMITER //
@@ -87,13 +91,14 @@ BEGIN
     RETURN cat;
 END //
 DELIMITER ;
-
+~~~~
 -- Exercici 7
+~~~ mysql
 SELECT empleat_id,nom,TIMESTAMPDIFF(YEAR, data_contractacio, CURDATE()) anys_treballats,spCategoria(empleat_id) categoria
 	FROM empleats;
-
--- Exercici 8
-use rrhh;
+~~~
+Ex 8
+~~~ mysql
 DROP FUNCTION IF EXISTS spEdat;
 
 DELIMITER //
@@ -112,9 +117,9 @@ BEGIN
     RETURN edat;
 END //
 DELIMITER ;
- 
---  Exercici 9 
-
+ ~~~
+Ex 9 
+~~~ mysql
 DROP FUNCTION IF EXISTS spDirectors;
 
 DELIMITER //
