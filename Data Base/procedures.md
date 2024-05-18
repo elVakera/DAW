@@ -147,6 +147,7 @@ END
 
 CALL spNomCognom(100)
 ~~~
+Ex 11
 ~~~ mysql
 DROP PROCEDURE IF EXISTS spModNomCognom;
 DELIMITER //
@@ -163,6 +164,7 @@ BEGIN
 END
 // DELIMITER ;
 ~~~~
+Ex 12
 ~~~ mysql
 DROP PROCEDURE IF EXISTS spRegLog;
 DELIMITER //
@@ -174,6 +176,7 @@ BEGIN
 END
 // DELIMITER ;
 ~~~
+Ex 13
 ~~~ mysql
 DROP PROCEDURE IF EXISTS spEliminarDeps;
 DELIMITER //
