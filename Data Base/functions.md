@@ -92,7 +92,7 @@ BEGIN
 END //
 DELIMITER ;
 ~~~~
--- Exercici 7
+Ex 7
 ~~~ mysql
 SELECT empleat_id,nom,TIMESTAMPDIFF(YEAR, data_contractacio, CURDATE()) anys_treballats,spCategoria(empleat_id) categoria
 	FROM empleats;
