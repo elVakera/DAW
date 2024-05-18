@@ -137,3 +137,12 @@ DELIMITER ;
 
 SELECT spDirectors()
 ~~~
+Ex 10
+~~~ mysql
+SHOW CREATE FUNCTION spPringat;
+
+SELECT * FROM information_schema.routines;
+	
+
+SHOW TABLES FROM information_schema;
+~~~
