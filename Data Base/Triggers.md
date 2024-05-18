@@ -1,3 +1,4 @@
+# Triggers
 Ex 3
 ~~~ mysql
 CREATE TABLE auditoria_taules(
@@ -8,8 +9,7 @@ CREATE TABLE auditoria_taules(
     valors      VARCHAR(250)
 
 );
-~~~
-~~~ mysql
+
 DROP TRIGGER IF EXISTS auditar_INS
 DELIMITER //
 CREATE TRIGGER auditar_INS AFTER INSERT 
@@ -19,8 +19,7 @@ BEGIN
     VALUES (USER(),NOW(),"empleats","AFEGIR",NEW.empleat_id);
 END;
 // DELIMITER ;
-~~~
-~~~ mysql
+
 DROP TRIGGER IF EXISTS auditar_UDT
 DELIMITER //
 CREATE TRIGGER auditar_UDT AFTER UPDATE 
@@ -66,8 +65,7 @@ BEGIN
     
 END
 // DELIMITER ;
-~~~
-~~~ mysql
+
 DROP TRIGGER IF EXISTS auditar_DEL
 DELIMITER //
 CREATE TRIGGER auditar_DEL AFTER DELETE
