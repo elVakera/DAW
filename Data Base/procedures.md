@@ -1,21 +1,21 @@
-~~~ mysql
-# enunciats de procediments
+# Procedures
 
--- Exercici 1
+Ex 1
+~~~ mysql
 DELIMITER //
 CREATE PROCEDURE spObtenirDataUsuari ()
 BEGIN
     SELECT NOW(),USER()
 END
 // DELIMITER ;
-
--- Exercici 2
+~~~ 
+Ex 2
+~~~ mysql
 DROP PROCEDURE IF EXISTS spSwapSou;
 DELIMITER //
 CREATE PROCEDURE spSwapSou (IN pEmpId1 INT ,IN pEmpId2 INT)
 BEGIN
     DECLARE vT DECIMAL(8,2);
-    -- hay que comprobar que los id existan y tambien explicar paso a paso en lenguaje natural lo que se quiere lograr
     SELECT salari INTO vT
         FROM empleats
     WHERE empleat_id=pEmpId1;
@@ -26,8 +26,9 @@ BEGIN
          WHERE empleat_id=pEmpId2;
 END
 // DELIMITER ;
-
--- Exercici 3
+~~~ 
+Ex 3
+~~~ mysql
 DROP PROCEDURE IF EXISTS spSwapDep;
 DELIMITER //
 CREATE PROCEDURE spSwapDep (IN pEmpId1 INT ,IN pEmpId2 INT)
@@ -35,31 +36,30 @@ BEGIN
 
     DECLARE vT INT;
 
-    -- obtener el departamento del empleado 1 y guardarlo en la variable temporal
     SELECT departament_id INTO vT 
         FROM empleats 
     WHERE empleat_id=pEmpId1;
 
-    -- asignarle al empleado dos el departamento id del empleado 1 (esta guardado en la variable vT)
    UPDATE empleats
         departament_id=vT;
     WHERE empleat_id =pEmpId2;
 END
 // DELIMITER ;
-
--- Exercici  4
+~~~ 
+Ex 4
+~~~ mysql
 DROP PROCEDURE IF EXISTS spReasignarEmpleats;
 DELIMITER //
 CREATE PROCEDURE spReasignarEmpleats (IN pdep1 INT ,IN pdep2 INT)
 BEGIN
-    -- no hay que comprobarlo porque el update no hara nada si no se encuentra, si se podria comprobar que no se entre un null
     UPDATE empleats
-        SET departament_id = pdep1 -- si este esta mal dara error de FK
-    WHERE departament_id = pdep2; -- si este esta mal no hara nada porque no hay coincidencia con los datos
+        SET departament_id = pdep1
+    WHERE departament_id = pdep2;
 END
 // DELIMITER ;
-
--- Exercici 5
+~~~ 
+Ex 5
+~~~ mysql
 DROP PROCEDURE IF EXISTS spLlista;
 DELIMITER //
 CREATE PROCEDURE spLlista ()
@@ -71,9 +71,9 @@ BEGIN
 
 END
 // DELIMITER ;
-
--- Exercici 6
-
+~~~ 
+Ex 6
+~~~ mysql
 DELIMITER //
 CREATE PROCEDURE spInfoEmp (IN pEmpcodi INT)
 BEGIN
@@ -82,16 +82,17 @@ BEGIN
     WHERE empleat_id = pEmpcodi;
 END
 // DELIMITER ;
-
--- Exercici 7
-
+~~~
+Ex 7
+~~~ mysql
 CREATE TABLE
     logs_usuaris (
         usuari VARCHAR(100),
         data DATETIME,
     );
-
--- Exercici 8
+~~~
+Ex 8
+~~~ mysql
 DELIMITER //
 CREATE PROCEDURE  spInserirlogs()
 BEGIN
@@ -99,9 +100,9 @@ BEGIN
     SELECT CURRENT_USER(), NOW();
 END
 // DELIMITER ;
-
--- Exercici 9
-
+~~~ 
+Ex 9
+~~~ mysql
 DELIMITER //
 CREATE PROCEDURE  spAfegirDep(pCodiDep INT,pNomDep VARCHAR(30),pCodiLoc INT)
 BEGIN
@@ -130,10 +131,10 @@ BEGIN
 
 END
 // DELIMITER ;
-
--- Exercici 10
+~~~
+Ex 10
+~~~ mysql
 DROP PROCEDURE IF EXISTS spNomCognom;
--- no retorna. como hacerlo retornar
 DELIMITER //
 CREATE PROCEDURE spNomCognom (IN pEmpcodi INT,OUT vNom VARCHAR(20),OUT vCognom VARCHAR(25))
 BEGIN
@@ -145,9 +146,9 @@ END
 // DELIMITER ;
 
 CALL spNomCognom(100)
-
+~~~
+~~~ mysql
 DROP PROCEDURE IF EXISTS spModNomCognom;
--- no retorna. como hacerlo retornar
 DELIMITER //
 CREATE PROCEDURE spModNomCognom (IN pEmpcodi INT,IN pNom VARCHAR(20),IN pCognom VARCHAR(25))
 BEGIN
@@ -161,9 +162,9 @@ BEGIN
 
 END
 // DELIMITER ;
-
+~~~~
+~~~ mysql
 DROP PROCEDURE IF EXISTS spRegLog;
--- no retorna. como hacerlo retornar
 DELIMITER //
 CREATE PROCEDURE spRegLog (IN pEmpcodi INT,IN ptaula VARCHAR(20),IN pVpk VARCHAR(25))
 BEGIN
@@ -172,30 +173,24 @@ BEGIN
         VALUES(user(),now(),ptaula,pVpk);
 END
 // DELIMITER ;
+~~~
+~~~ mysql
+DROP PROCEDURE IF EXISTS spEliminarDeps;
+DELIMITER //
+CREATE PROCEDURE spEliminarDeps (IN pCodi INT)
+BEGIN
 
--- DROP PROCEDURE IF EXISTS spEliminarDeps;
--- -- no retorna. como hacerlo retornar
--- DELIMITER //
--- CREATE PROCEDURE spEliminarDeps (IN pCodi INT)
--- BEGIN
+     DELETE FROM departaments
+     WHERE departament_id=pCodi;
 
---     DELETE FROM departaments
---     WHERE departament_id=pCodi;
+     IF (!spComprovarDep(pCodi)) THEN 
+         CALL spRegLog ('departaments', 'ELIMINAR', pCodi);
+     END IF;
 
---     /* sol clase -> ROW_COUNT() > 0 como condicion retorna si la ultima instruccion ha modificado algun registro  */
+     UPDATE empleats
+         SET id_cap=NULL
+     WHERE empleat_id IN (SELECT empleat_id FROM empleats WHERE departament_id=pCodi)
 
---     IF (!spComprovarDep(pCodi)) THEN 
---         CALL spRegLog ('departaments', 'ELIMINAR', pCodi);
---     END IF;
-
---     -- petara por empleats
-
---     UPDATE empleats
---         SET id_cap=NULL -- esto no funciona 
---     WHERE empleat_id IN (SELECT empleat_id FROM empleats WHERE departament_id=pCodi)
-
---     -- petara por historial_feines
-
--- END
--- // DELIMITER ;
-@@@  
+ END
+ // DELIMITER ;
+~~~ 
