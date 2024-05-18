@@ -1,8 +1,6 @@
+# Cursors
+Ex 1 
 ~~~ mysql
--- Exercici 1 
-
-use rrhh;
-
 DROP PROCEDURE IF EXISTS spCrearCopia;
 DELIMITER //
 CREATE PROCEDURE spCrearCopia (pEmpId INT)
@@ -32,9 +30,9 @@ BEGIN
 END
 
 // DELIMITER ;
-
--- Exercici 2
-
+~~~
+Ex 2
+~~~ mysql
 CREATE TABLE categories ( 
 	codi CHAR(2) PRIMARY KEY, 
 	nom VARCHAR(30), 
@@ -111,11 +109,9 @@ BEGIN
 	CLOSE emp;
 END //
 DELIMITER ;
-
-use rrhh;
-
--- Exercici 3
-
+~~~
+Ex 3
+~~~ mysql
 ALTER TABLE departaments
 	ADD COLUMN salari_avg DECIMAL(8,2);
 DROP PROCEDURE IF EXISTS spAvgSalary;
@@ -155,8 +151,9 @@ BEGIN
 	
 END 
 // DELIMITER;
-
--- Exercici 4
+~~~
+Ex 4
+~~~ mysql
 CREATE TABLE pringats (
 		empleat_id INT,
 		departament_id INT,
@@ -199,9 +196,9 @@ BEGIN
 
 END 
 // DELIMITER ;
-
--- Exercici 5
-
+~~~
+Ex 5
+~~~ mysql
 DROP PROCEDURE IF EXISTS spTaulapringats;
 
 DELIMITER // 
@@ -237,9 +234,9 @@ BEGIN
 
 END 
 // DELIMITER ;
-
--- Exercici 6
-use rrhh;
+~~~
+Ex 6
+~~~ mysql
 CREATE TABLE empleats_segregats(
 	id_empleat	INT,
 	mes			INT
@@ -279,9 +276,9 @@ CALL spSepararEmpleats();
 
 SELECT *
 	FROM empleats_segregats
-
--- Exercici 7
-
+~~~
+Ex 7
+~~~ mysql
 ALTER TABLE feines
 	ADD COLUMN qt_historicTreballadors INT;
 
@@ -336,9 +333,9 @@ BEGIN
 	CLOSE cursfeines;
 
 END;
-
--- Exercici 8
-
+~~~
+Ex 8
+~~~ mysql
 CREATE TABLE factura (
 		numf INT (8) PRIMARY KEY,
 		data DATETIME,
