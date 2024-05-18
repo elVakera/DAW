@@ -1,6 +1,5 @@
+Ex 3
 ~~~ mysql
--- Exercici 3
-use rrhh;
 CREATE TABLE auditoria_taules(
     usuari      VARCHAR(100),
     data        DATETIME,
@@ -9,7 +8,8 @@ CREATE TABLE auditoria_taules(
     valors      VARCHAR(250)
 
 );
-
+~~~
+~~~ mysql
 DROP TRIGGER IF EXISTS auditar_INS
 DELIMITER //
 CREATE TRIGGER auditar_INS AFTER INSERT 
@@ -19,7 +19,8 @@ BEGIN
     VALUES (USER(),NOW(),"empleats","AFEGIR",NEW.empleat_id);
 END;
 // DELIMITER ;
-
+~~~
+~~~ mysql
 DROP TRIGGER IF EXISTS auditar_UDT
 DELIMITER //
 CREATE TRIGGER auditar_UDT AFTER UPDATE 
@@ -65,7 +66,8 @@ BEGIN
     
 END
 // DELIMITER ;
-
+~~~
+~~~ mysql
 DROP TRIGGER IF EXISTS auditar_DEL
 DELIMITER //
 CREATE TRIGGER auditar_DEL AFTER DELETE
@@ -89,9 +91,9 @@ WHERE empleat_id=1000;
 
 SELECT * FROM empleats;
 SELECT * FROM auditoria_taules
-
+~~~
 -- Exercici 4
-
+~~~ mysql
 DROP TRIGGER IF EXISTS trg_salari_empleats;
 DELIMITER //
 CREATE TRIGGER trg_salari_empleats BEFORE UPDATE ON empleats FOR EACH ROW
@@ -127,10 +129,9 @@ BEGIN
 
 END
 // DELIMITER ;
-
--- Exercici 5
-
-
+~~~~
+Ex 5
+~~~ mysql
 ALTER TABLE departaments
     ADD COLUMN num_empleats INT DEFAULT 0;
 
@@ -158,12 +159,13 @@ BEGIN
     WHERE departament_id=NEW.departament_id;
 END
 // DELIMITER;
+~~~
+~~~ mysql
+/* SELECT * FROM empleats
 
--- SELECT * FROM empleats
+ INSERT INTO empleats(empleat_id,cognoms,email,data_contractacio,feina_codi,departament_id)
+     VALUES (1002,"test","a@email.com","2022-01-01","AC_MGR",1);
 
--- INSERT INTO empleats(empleat_id,cognoms,email,data_contractacio,feina_codi,departament_id)
---     VALUES (1002,"test","a@email.com","2022-01-01","AC_MGR",1);
-
--- DELETE FROM empleats
--- WHERE empleat_id > 211
-~~~ 
+ DELETE FROM empleats
+ WHERE empleat_id > 211*/
+~~~
