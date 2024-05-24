@@ -115,7 +115,13 @@ db.getCollection('empleats').aggregate(
 de les feines que ha tingut cada empleat. Si l’empleat no ha tingut cap treure el
 camp “historial_feines”.
 ~~~ javascript
-
+db.getCollection('empleats').aggregate(
+  [
+    {
+      $cond: {historial feines}
+    }
+  ]
+)
 ~~~
 8. Com que tot empleat té una feina incorpora la feina actual com una feina més.
 ~~~ javascript
