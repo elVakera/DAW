@@ -118,27 +118,111 @@ camp “historial_feines”.
 db.getCollection('empleats').aggregate(
   [
     {
-      $cond: {historial feines}
+      $addFields: {
+        historial_feines: {
+          $cond: {
+            if: { $isArray: '$historial_feines' },
+            then: { $size: '$historial_feines' },
+            else: '$$REMOVE'
+          }
+        }
+      }
     }
   ]
 )
 ~~~
 8. Com que tot empleat té una feina incorpora la feina actual com una feina més.
 ~~~ javascript
-
+db.getCollection('empleats').aggregate(
+  [
+    {
+      $addFields: {
+        historial_feines: {
+          $cond: {
+            if: { $isArray: '$historial_feines' },
+            then: { $size: '$historial_feines' },
+            else: '$$REMOVE'
+          }
+        }
+      }
+    },
+    {
+      $addFields: {
+        historial_feines: {
+          $add: ['$historial_feines', 1]
+        }
+      }
+    }
+  ]
+)
 ~~~    
 9. Mostra aquells empleats que han tingut 2 feines o més.
 ~~~ javascript
-
+db.getCollection('empleats').aggregate(
+  [
+    {
+      $addFields: {
+        historial_feines: {
+          $cond: {
+            if: { $isArray: '$historial_feines' },
+            then: { $size: '$historial_feines' },
+            else: '$$REMOVE'
+          }
+        }
+      }
+    },
+    {
+      $addFields: {
+        historial_feines: {
+          $add: ['$historial_feines', 1]
+        }
+      }
+    },
+    {
+      $match: {
+        historial_feines: {$gte:2}
+      }
+    }
+  ]
+)
 ~~~    
 10.Per cada empleat mostra les dades del seu departament. Redefineix el mateix
 camp departament del document empleats.
 ~~~ javascript
-
+db.getCollection('empleats').aggregate(
+  [
+    {
+      $lookup: {
+        from: 'epartaments',
+        localField: 'departament.coi',
+        foreignField: 'codi',
+        as: 'departament'
+      }
+    }
+  ]
+)
 ~~~
 11.Si has utilitzat $join a l’exercici anterior veuràs que el camp departament és un
 array. Per tant fés el que necessitis perquè aquest camp sigui un objecte a on hi
 hagi la informació del departament i no un array.
 ~~~ javascript
-
+db.getCollection('empleats').aggregate(
+  [
+    {
+      $lookup: {
+        from: 'epartaments',
+        localField: 'departament.coi',
+        foreignField: 'codi',
+        as: 'departament'
+      }
+    },
+    {
+      $addFields: {
+        departament: {
+          $arrayElemAt: ['$departament', 0]
+        }
+      }
+    }
+  ]
+)
 ~~~
